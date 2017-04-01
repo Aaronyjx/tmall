@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- codning:utf-8 -*-
+# -*- coding:utf-8 -*-
 # Created by aaron at 3/31/17
 
 # System level
@@ -84,8 +84,7 @@ class Webs:
 #            actions = ActionChains(driver)
 #            actions.move_to_element(next).perform()
             next.click()
-        except (NoSuchElementException, Exception) as e:
-            print(e)
+        except NoSuchElementException:
             print('Search next page failed')
 
         try:

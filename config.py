@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- codning:utf-8 -*-
+# -*- coding:utf-8 -*-
 # Created by aaron at 3/30/17
 import time
 from selenium import webdriver
@@ -13,3 +13,5 @@ DRIVER = webdriver.Chrome()
 TIMEOUT = 10
 SEARCH_LINK = 'https://www.tmall.com/'
 PAGE = 10
+COUNT = 10
+ANONYMOUS_STR = '***'
