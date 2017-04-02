@@ -17,7 +17,6 @@ def inputKey():
     keyword = input()
     if not keyword.isalnum:
         keyword.decode(sys.stdin.encoding or locale.getpreferredencoding(True))
-#    print('You have input: ', keyword)
     return keyword
 
 def createFile():
