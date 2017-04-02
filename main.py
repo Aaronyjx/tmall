@@ -62,13 +62,11 @@ def crawlAndWrite(path, filename):
     excel = Excel()
     records = read.readFile(path, filename)
     for record in records:
-
         record = record.strip('\n')
         infos = crawl.crawler(record)
         for info in infos:
             url = info.get('url')
             comments = info.get('commentsInfo')
-            print(comments)
             for comment in comments:
                 content = comment[0]
                 user = comment[1]
