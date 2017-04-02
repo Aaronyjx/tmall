@@ -5,7 +5,7 @@
 # System level
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
+#from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
@@ -13,7 +13,7 @@ from pyquery import PyQuery as pq
 import sys
 
 # Private
-import config
+import setup
 
 class Webs:
     """Define web handler"""
@@ -23,12 +23,12 @@ class Webs:
 
     def search(self, keyword):
         """Search by keyword"""
-        driver = config.DRIVER
-        link = config.SEARCH_LINK
+        driver = setup.DRIVER
+        link = setup.SEARCH_LINK
         driver.get(link)
 
         try: # Driver Chrome
-            WebDriverWait(driver, config.TIMEOUT).until(
+            WebDriverWait(driver, setup.TIMEOUT).until(
                 EC.presence_of_element_located((By.ID, "mq"))
             )
         except TimeoutException:
@@ -45,7 +45,7 @@ class Webs:
 #        print('Searching now')
 
         try: # Search keyword
-            WebDriverWait(driver, config.TIMEOUT).until(
+            WebDriverWait(driver, setup.TIMEOUT).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "#J_ItemList div.productImg-wrap"))
             )
         except TimeoutException:
@@ -69,7 +69,7 @@ class Webs:
         return self.linklist # Return Link list
 
     def searchMore(self):
-        driver = config.DRIVER
+        driver = setup.DRIVER
 
 #        try:
 #            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -88,7 +88,7 @@ class Webs:
             print('Search next page failed')
 
         try:
-            WebDriverWait(driver, config.TIMEOUT).until(
+            WebDriverWait(driver, setup.TIMEOUT).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "#J_ItemList div.productImg-wrap"))
             )
         except TimeoutException:

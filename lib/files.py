@@ -31,6 +31,7 @@ class Files:
         with open(filename, 'wt') as f:
             f.write('')
             f.close()
+#        return (path, filename)
 
     def writeFile(self, path, filename, content):
         """Write File"""
@@ -42,6 +43,16 @@ class Files:
         with open(filename, 'wt') as f:
             f.write(content)
             f.close()
+    def readFile(self,path, filename):
+        """Read file"""
+        if not path.endswith('/'):
+            file = path + '/' + filename + '.txt'
+        else:
+            file = path + filename + '.txt'
+
+        with open(file, 'r') as f:
+            records = f.readlines()
+        return records
 
     def fileList(self, path, pathfile, filename):
         """Generate filelist"""

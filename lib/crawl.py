@@ -12,7 +12,7 @@ from pyquery import PyQuery as pq
 import sys
 
 # Private
-import config
+import setup
 
 class Crawl:
     """Crawling web"""
@@ -21,16 +21,7 @@ class Crawl:
     def crawler(self, url):
         """Main crawler"""
         infos = self.crawlInfo(url)
-        for info in infos:
-            url = info.get('url')
-            commentsInfo = info.get('commentsInfo')
-            for commentInfo in commentsInfo:
-                commentContent = commentInfo[0]
-                commentUser = commentInfo[1]
-                print('commentUser', commentUser)
-#                if len(commentsInfo) > 0 and not repeatExcel(commentUser):
-#                    writeFile()
-
+        return infos
 
     def crawlInfo(self,url):
         """Crawling information"""
@@ -44,7 +35,6 @@ class Crawl:
             doc = pq(html)
             items = doc('#J_TjWaterfall > li')
             for item in items.items():
-                print(item)
                 url = item.find('a').attr('href')
                 if not url.startswith('http'):
                     url = 'https:' + url
@@ -53,7 +43,6 @@ class Crawl:
                 for comment in comments:
                     commentUser = comment.find('b').remove().text()
                     commentContent = comment.text()
-                    anonymousStr = config.ANONYMOUS_STR
                     commentsInfo.append((commentContent,commentUser))
                 info.append({'url': url, 'commentsInfo': commentsInfo})
             return info
@@ -61,13 +50,14 @@ class Crawl:
             return []
 
     def crawlPage(self, url):
-        driver = config.DRIVER
+        driver = setup.DRIVER
         try:
             driver.get(url)
-            WebDriverWait(driver, config.TIMEOUT).until(
+            WebDriverWait(driver, setup.TIMEOUT).until(
                 EC.presence_of_element_located((By.ID, "J_TabBarBox"))
             )
-        except TimeoutException:
+        except (TimeoutException, Exception) as e:
+            print(e)
             print('Search page failed')
 
         if self.pageDown(driver):
@@ -81,7 +71,7 @@ class Crawl:
         result = self.pageBottom(driver, count)
         while not result:
             count = count + 1
-            if count == config.COUNT:
+            if count == setup.COUNT:
                 return False
             result = self.pageBottom(driver, count)
         return True
@@ -103,5 +93,3 @@ class Crawl:
             print('Locate information failed')
             return False
         return True
-
-
