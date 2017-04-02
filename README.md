@@ -1,4 +1,4 @@
-# Tmall - Keep upgading
+# Tmall - Keep upgrading
 Tmall is for Crawl Tmall web
 
 # Platform:
