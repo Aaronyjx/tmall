@@ -1,8 +1,11 @@
 # Tmall - Keep upgading
 Tmall is for Crawl Tmall web
 
-Platform: Ubuntu 16.04
+# Platform:
+Ubuntu 16.04
 
-IDE: PyCharm
+# IDE:
+PyCharm
 
-Language: Python
+# Language:
+Python
